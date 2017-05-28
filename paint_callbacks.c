@@ -26,7 +26,6 @@ void Display(void)
 
 void Mouse(int button, int state, int x, int y)
 {
-  /* change g_activeOption */
 
 } /* end of Mouse func */
 
