@@ -5,7 +5,10 @@ CONFIG -= qt
 
 # openGL include
 QT += gl
-LIBS += /usr/lib/libglut.so /usr/lib/libGL.so
+##for ubuntu
+LIBS += /usr/lib/x86_64-linux-gnu/libglut.so /usr/lib/x86_64-linux-gnu/libGL.so
+## for arch
+#LIBS += /usr/lib/libglut.so /usr/lib/libGL.so
 
 SOURCES += main.c \
     paint_graphics.c \

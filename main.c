@@ -3,12 +3,14 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "paint_callbacks.h"
+#include "paint_graphics.h"
 #include "types.h"
 
 #define MAPP 600
 /* global definitions */
-
 OPTION_t g_activeOption = PENCIL;
+COLOR_t g_activeColor;
+int g_lineWigth = 1;
 
 int main(int argc, char *argv[])
 {
