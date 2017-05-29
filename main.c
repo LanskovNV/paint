@@ -9,7 +9,7 @@
 #define MAPP 600
 /* global definitions */
 OPTION_t g_activeOption = PENCIL;
-COLOR_t g_activeColor;
+COLOR_t g_color;
 int g_lineWigth = 1;
 
 int main(int argc, char *argv[])

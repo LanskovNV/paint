@@ -7,7 +7,7 @@
 #include "paint_system.h"
 
 extern OPTION_t g_activeOption;
-extern COLOR_t g_activeColor;
+extern COLOR_t g_color;
 extern int g_lineWigth;
 void Keyboard(unsigned char Key, int MouseX, int MouseY)
 {
@@ -54,13 +54,10 @@ void Motion(int x, int y)
       glLineWidth(g_lineWigth);
       glBegin(GL_LINES);
       glColor3f(color.R, color.G, color.B);
-      glVertex2d(, pos.y);
-      glVertex2d(pos.x + changeX, pos.y);
+      glVertex2d(oldPos.x, oldPos.y);
+      glVertex2d(newPos.x, newPos.y);
       glEnd();
-
-
     }
-
     break;
   default:
     break;
