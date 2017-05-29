@@ -13,12 +13,10 @@ LIBS += /usr/lib/x86_64-linux-gnu/libglut.so /usr/lib/x86_64-linux-gnu/libGL.so
 SOURCES += main.c \
     paint_graphics.c \
     paint_memory.c \
-    paint_callbacks.c \
     paint_system.c
 
 HEADERS += \
     paint_graphics.h \
     types.h \
     paint_memory.h \
-    paint_callbacks.h \
     paint_system.h
