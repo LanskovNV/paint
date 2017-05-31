@@ -5,13 +5,16 @@
 #include "paint_graphics.h"
 #include "types.h"
 
-#define MAPP 600
+#define MAPP 1000
+#define WEIGTH 800
+#define HIGTH 800
+#define COL 3
+
 /* global definitions */
 OPTION_t g_activeOption = PENCIL;
-COLOR_t g_color;
-int g_lineWigth = 3;
+BYTE_t g_field[HIGTH][WEIGTH][COL];
 
-void Keyboard(unsigned char Key, int MouseX, int MouseY)
+void Keyboard(BYTE_t Key, int MouseX, int MouseY)
 {
   if (Key == 27) // escape
     exit(0);
@@ -20,8 +23,8 @@ void Keyboard(unsigned char Key, int MouseX, int MouseY)
 void Display(void)
 {
   /* clear screen */
-  //glClearColor(1, 1, 1, 1); // change background color
-  //glClear(GL_COLOR_BUFFER_BIT);
+  glClearColor(1, 1, 1, 1); // change background color
+  glClear(GL_COLOR_BUFFER_BIT);
 
   /* buffers */
   glutPostRedisplay();
@@ -36,20 +39,10 @@ void Mouse(int button, int state, int x, int y)
 
 void Motion(int x, int y)
 {
-  static POINT_t oldPos;
-  POINT_t newPos;
-
-  newPos.x = (x - CONV_X) / CONV_X;
-  newPos.y = (-1.0) * (y - CONV_Y) / CONV_Y;
   switch (g_activeOption)
   {
   case PENCIL:
-    if (oldPos.x == 0 && oldPos.y == 0)
-    {
-      oldPos.x = (x - CONV_X) / CONV_X;
-      oldPos.y = (-1.0) * (y - CONV_Y) / CONV_Y;
-    }
-    DrawLine(newPos, oldPos, g_lineWigth, g_color);
+
     break;
   default:
     break;

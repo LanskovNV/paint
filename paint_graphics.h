@@ -7,15 +7,17 @@
 
 /* types */
 typedef struct {
-  float R, G, B;
+  int R, G, B;
 }COLOR_t;
 
 typedef struct {
-  float x, y;
+  int A, B;
 }POINT_t;
 
 /* functions */
-void ColorInit(COLOR_t *color, float R, float G, float B);
-void DrawLine(POINT_t A, POINT_t B, int width, COLOR_t color);
+void FieldInit();
+void DrawLine();
+void DrawCircle();
+
 
 #endif // PAINT_GRAPHICS_H
