@@ -3,28 +3,20 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "paint_graphics.h"
+#include "paint_system.h"
 #include "types.h"
-
-#define MAPP 1000
-#define WEIGTH 800
-#define HIGTH 800
-#define COL 3
 
 /* global definitions */
 OPTION_t g_activeOption = PENCIL;
-BYTE_t g_field[HIGTH][WEIGTH][COL];
-
-void Keyboard(BYTE_t Key, int MouseX, int MouseY)
-{
-  if (Key == 27) // escape
-    exit(0);
-}
+PIC_t g_field;
 
 void Display(void)
 {
   /* clear screen */
   glClearColor(1, 1, 1, 1); // change background color
   glClear(GL_COLOR_BUFFER_BIT);
+
+  glDrawPixels(WEIGTH, HIGTH, GL_BGR_EXT, GL_UNSIGNED_BYTE, g_field.pixels);
 
   /* buffers */
   glutPostRedisplay();
@@ -51,8 +43,10 @@ void Motion(int x, int y)
 
 int main(int argc, char *argv[])
 {
+  COLOR_t backCol;
 
-  ColorInit(&g_color, 1, 1, 1);
+  ColorInit(250, 250, 250, &backCol);
+  FieldInit(&g_field, backCol, WEIGTH, HIGTH);
 
   /* glut init */
   glutInit(&argc, argv);
@@ -66,7 +60,6 @@ int main(int argc, char *argv[])
 
   /* callback functions */
   glutDisplayFunc(Display);
-  glutKeyboardFunc(Keyboard);
   glutMouseFunc(Mouse);
   glutMotionFunc(Motion);
 
