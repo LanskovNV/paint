@@ -1,48 +1,53 @@
 /* leins, 28.05.2017 */
+#include <math.h>
 #include <stdlib.h>
 #include "paint_system.h"
 #include "paint_graphics.h"
 
-BOOL_t PicCreate( PIC_t *P, int NewW, int NewH )
+POINT_t PosInit(int x, int y)
 {
-  if (NewW == 0 || NewH == 0)
-    return FALSE;
+  POINT_t p;
 
-  P->pixels = malloc( sizeof(BYTE_t) * NewW * NewH * COL );
-  P->higth = NewH;
-  P->weigth = NewW;
-  return TRUE;
-} /* end of file */
+  p.x = x;
+  p.y = y;
 
-/*void PicFree( PIC_t *P )
-{
-  if (P->Pixels != NULL)
-    free(P->Pixels);
-  P->W = P->H = 0;
-  P->Pixels = NULL;
-} *//* end of file */
-
-void ColorInit(int r, int g, int b, COLOR_t *col)
-{
-  col->R = r;
-  col->G = g;
-  col->B = b;
+  return p;
 } /* end of func */
 
-void FieldInit(PIC_t *field, COLOR_t bkgColor, int width, int heidth)
+COLOR_t ColorInit(int r, int g, int b)
 {
-  int i, j;
+  COLOR_t col;
 
-  if (field->pixels == NULL)
-    PicCreate(field, width, heidth);
-
-  for (i = 0; i < HIGTH; i++)
-    for (j = 0; j < WEIGTH; j++)
-    {
-      field->pixels[i][j][0] = bkgColor.R;
-      field->pixels[i][j][1] = bkgColor.G;
-      field->pixels[i][j][2] = bkgColor.B;
-    }
+  col.R = r;
+  col.G = g;
+  col.B = b;
+  return col;
 } /* end of func */
 
+void FieldInit(COLOR_t *F)
+{
+  int x, y;
+  COLOR_t color = ColorInit(255, 255, 255); // color set
+
+  for (y = 0; y < HEIGTH; y++)
+    for (x = 0; x < WIDTH; x++)
+        F[y * WIDTH + x] = color;
+
+} /* end of func */
+
+float GetLineLen(POINT_t A, POINT_t B)
+{
+  int deltaX = A.x - B.x, deltaY = A.y - B.y;
+
+  if (deltaX == 0)
+    if (deltaY == 0)
+      return 0;
+    else
+      return abs(deltaY);
+  else
+    if (deltaY == 0)
+      return deltaX;
+    else
+      return sqrt(deltaX *deltaX + deltaY * deltaY);
+} /* end of func */
 

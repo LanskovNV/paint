@@ -7,16 +7,18 @@
 #include "types.h"
 
 /* global definitions */
-OPTION_t g_activeOption = PENCIL;
-PIC_t g_field;
+COLOR_t g_field[HEIGTH * WIDTH];
+int g_lineSize = 3;
 
 void Display(void)
 {
   /* clear screen */
-  glClearColor(1, 1, 1, 1); // change background color
+  glClearColor(0.8, 0.8, 0.8, 1); // change background color
   glClear(GL_COLOR_BUFFER_BIT);
 
-  glDrawPixels(WEIGTH, HIGTH, GL_BGR_EXT, GL_UNSIGNED_BYTE, g_field.pixels);
+  //glRasterPos2d(1, -1);
+  /*glPixelZoom(ZOOM, -ZOOM);*/
+  glDrawPixels(WIDTH, HEIGTH, GL_BGR_EXT, GL_UNSIGNED_BYTE, g_field);
 
   /* buffers */
   glutPostRedisplay();
@@ -25,28 +27,28 @@ void Display(void)
 
 void Mouse(int button, int state, int x, int y)
 {
-  /* change g_activeOption */
-
 } /* end of Mouse func */
 
 void Motion(int x, int y)
 {
-  switch (g_activeOption)
-  {
-  case PENCIL:
+  static POINT_t oldPos;
+  POINT_t newPos = PosInit(x, y);
+  float len;
 
-    break;
-  default:
-    break;
+
+  if (oldPos.x == 00 && oldPos.y == 0)
+    oldPos = PosInit(x, y);
+
+  if ((len = GetLineLen(newPos, oldPos)) > 5)
+  {
+    PutLine(g_field, ColorInit(0,0,0),newPos, oldPos, len);
+    oldPos = PosInit(x, y);
   }
 }/* end of Motion func */
 
 int main(int argc, char *argv[])
 {
-  COLOR_t backCol;
-
-  ColorInit(250, 250, 250, &backCol);
-  FieldInit(&g_field, backCol, WEIGTH, HIGTH);
+  FieldInit(g_field);
 
   /* glut init */
   glutInit(&argc, argv);

@@ -7,8 +7,8 @@
 #define CONV_Y 300.0
 
 /* functions */
-void DrawCube(PIC_t field, POINT_t pos, COLOR_t color, int len);
-void DrawRubber();
-void PutLine(PIC_t field, POINT_t A, POINT_t B, int lineW, COLOR_t color);
+void DrawCube(COLOR_t *field, COLOR_t color, POINT_t pos);
+void PutLine(COLOR_t *field, COLOR_t color, POINT_t A, POINT_t B, float len);
 
+void DrawRubber();
 #endif // PAINT_GRAPHICS_H

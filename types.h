@@ -1,26 +1,23 @@
 #ifndef TYPES_H
 #define TYPES_H
+// HEIGTH and WIDTH !!!!!!!!
 
 /* all macros is here */
-#define WEIGTH 800  // field weight
-#define HIGTH 800 // field higth
-#define COL 3 // color
-#define MAPP 1000 // window size
-
+#define WIDTH 750  // field weight
+#define HEIGTH 700 // field higth
+#define MAPP 800 // window size
+#define ZOOM 1
 /* useful types */
 typedef unsigned char BYTE_t;
-typedef struct{
-  BYTE_t pixels[COL];
-}RGB_t;
 
 typedef struct {
-  int weigth, higth;
-  RGB_t *pixels;
-}PIC_t;
-
-typedef struct {
-  int R, G, B;
+  BYTE_t R, G, B;
 }COLOR_t;
+
+typedef struct {
+  int heigth, width;
+  COLOR_t *pixels;
+}PIC_t;
 
 typedef struct {
   int x, y;

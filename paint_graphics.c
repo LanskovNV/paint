@@ -2,27 +2,30 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include "paint_graphics.h"
+#include "paint_system.h"
 #include "types.h"
 
-/*void DrawCube(BYTE_t *field[][], POINT_t pos, COLOR_t color, int len)
+extern int g_lineSize;
+
+void DrawCube(COLOR_t *field, COLOR_t color, POINT_t pos)
 {
   int i, j;
 
-  for (i = pos.y; i < len; i++)
-    for (i = pos.x; i < len; i++)
-    {
-      field[i][j][0] = color.R;
-      field[i][j][1] = color.G;
-      field[i][j][2] = color.B;
-    }
-}*//* End of DrawCircle function */
+  for (i = pos.y; i < pos.y + g_lineSize; i++)
+    for (j = pos.x; j < pos.x + g_lineSize; j++)
+      if (i * WIDTH + j < WIDTH * HEIGTH && i > 0 && j > 0)
+        field[i * WIDTH + j] = color;
+} /* end of func */
 
-/*void PutLine(BYTE_t *field[][], POINT_t A, POINT_t B, int lineW, COLOR_t color)
+void PutLine(COLOR_t *field, COLOR_t color, POINT_t A, POINT_t B, float len)
 {
+  POINT_t pos;
+  float i, t = 1. / len;
 
-}*/ /* end of func */
+  for (i = 0; i <= 1; i += t)
+  {
+    pos = PosInit(A.x + (A.x - B.x) * i, A.y + (A.y - B.y) * i);
+    DrawCube(field, color, pos);
+  }
+}
 
-/*void DrawRubber()
-{
-
-} *//* end of func */
