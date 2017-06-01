@@ -3,8 +3,8 @@
 // HEIGTH and WIDTH !!!!!!!!
 
 /* all macros is here */
-#define WIDTH 750  // field weight
-#define HEIGTH 700 // field higth
+#define WIDTH 800  // field weight
+#define HEIGTH 800 // field higth
 #define MAPP 800 // window size
 #define ZOOM 1
 /* useful types */

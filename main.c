@@ -8,7 +8,7 @@
 
 /* global definitions */
 COLOR_t g_field[HEIGTH * WIDTH];
-int g_lineSize = 3;
+int g_lineSize = 5;
 
 void Display(void)
 {
@@ -16,8 +16,9 @@ void Display(void)
   glClearColor(0.8, 0.8, 0.8, 1); // change background color
   glClear(GL_COLOR_BUFFER_BIT);
 
-  //glRasterPos2d(1, -1);
-  /*glPixelZoom(ZOOM, -ZOOM);*/
+  glRasterPos2d(-1, 1);
+  glPixelZoom(ZOOM, -ZOOM);
+  //Swap(g_field);
   glDrawPixels(WIDTH, HEIGTH, GL_BGR_EXT, GL_UNSIGNED_BYTE, g_field);
 
   /* buffers */
@@ -39,7 +40,7 @@ void Motion(int x, int y)
   if (oldPos.x == 00 && oldPos.y == 0)
     oldPos = PosInit(x, y);
 
-  if ((len = GetLineLen(newPos, oldPos)) > 5)
+  if ((len = GetLineLen(newPos, oldPos)) >= 5)
   {
     PutLine(g_field, ColorInit(0,0,0),newPos, oldPos, len);
     oldPos = PosInit(x, y);

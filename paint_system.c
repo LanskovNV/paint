@@ -51,3 +51,13 @@ float GetLineLen(POINT_t A, POINT_t B)
       return sqrt(deltaX *deltaX + deltaY * deltaY);
 } /* end of func */
 
+void Swap(COLOR_t *F)
+{
+  COLOR_t F1[WIDTH * HEIGTH];
+
+  int i;
+  for (i = 0; i < WIDTH * HEIGTH; i++)
+    F1[i] = F[WIDTH * HEIGTH];
+  for (i = 0; i < WIDTH * HEIGTH; i++)
+    F[i] = F[i];
+} /* end of func */
